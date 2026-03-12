@@ -42,7 +42,7 @@ func randomNumber(from: Int, to: Int) -> Int {
 }
 
 func randomCoin() -> String {
-    return Bool.random() ? "Орёл" : "Решка"
+    return Bool.random() ? "орёл" : "решка"
 }
 
 func randomDice(sides: Int) -> Int {
@@ -112,16 +112,162 @@ func randomColor() -> String {
     return "\(hex), rgb(\(red),\(green),\(blue))"
 }
 
-clearScreen()
-print("Случайная строка: \(randomString(length: 10, lettersWeight: 50, digitsWeight: 30))")
-print("Случайный пароль: \(randomPassword())")
-print("Случайное число: \(randomNumber(from: 1, to: 100))")
-print("Случайная сторона монетки: \(randomCoin())")
-print("Случайная сторона кубика: \(randomDice(sides: 6))")
-print("UUID: \(randomUUID())")
-print("HEX (16 bytes): \(randomHex(bytes: 16))")
-print("Случайный выбор: \(randPick(["apple", "banana", "orange"]))")
-print("Случайное перемешивание: \(randShuffle(["a", "b", "c", "d"]))")
-print("Случайный список: \(randomList(min: 1, max: 10, count: 5))")
-print("Случайная дата: \(randomDate(fromYear: 1990, toYear: 2026))")
-print("Случайный цвет: \(randomColor())") 
+func intFlagValue(_ flag: String, in args: [String]) -> Int? {
+    guard let index = args.firstIndex(of: flag), index + 1 < args.count else { return nil }
+    return Int(args[index + 1])
+}
+
+func printUsage() {
+    print("""
+    Использование:
+      swift main.swift <command> [options]
+
+    Команды:
+      number   [--min N] [--max N]
+      string   [--length N] [--letters-weight N] [--digits-weight N] [--specials-weight N]
+      password [--length N]
+      coin
+      dice     [--sides N]
+      uuid
+      hex      [--bytes N]
+      pick     <item1> <item2> ...
+      shuffle  <item1> <item2> ...
+      list     [--count N] [--min N] [--max N]
+      date     [--from YYYY] [--to YYYY]
+      color
+      help
+    """)
+}
+
+func printAllDefaults() {
+    clearScreen()
+    print("Случайная строка: \(randomString(length: 10, lettersWeight: 50, digitsWeight: 30))")
+    print("Случайный пароль: \(randomPassword())")
+    print("Случайное число: \(randomNumber(from: 1, to: 100))")
+    print("Случайная сторона монетки: \(randomCoin())")
+    print("Случайная сторона кубика: \(randomDice(sides: 6))")
+    print("UUID: \(randomUUID())")
+    print("HEX (16 bytes): \(randomHex(bytes: 16))")
+    print("Случайный выбор: \(randPick(["apple", "banana", "orange"]))")
+    print("Случайное перемешивание: \(randShuffle(["a", "b", "c", "d"]))")
+    print("Случайный список: \(randomList(min: 1, max: 10, count: 5))")
+    print("Случайная дата: \(randomDate(fromYear: 1990, toYear: 2026))")
+    print("Случайный цвет: \(randomColor())")
+}
+
+func runCommand(_ command: String, args: [String]) {
+    switch command {
+    case "number":
+        let minValue = intFlagValue("--min", in: args) ?? 1
+        let maxValue = intFlagValue("--max", in: args) ?? 100
+        guard minValue <= maxValue else {
+            print("Ошибка: --min не может быть больше --max")
+            return
+        }
+        print("Случайное число:", randomNumber(from: minValue, to: maxValue))
+
+    case "string":
+        let length = intFlagValue("--length", in: args) ?? 10
+        let lettersWeight = intFlagValue("--letters-weight", in: args) ?? 50
+        let digitsWeight = intFlagValue("--digits-weight", in: args) ?? 30
+        let specialsWeight = intFlagValue("--specials-weight", in: args)
+        let value = randomString(
+            length: length,
+            lettersWeight: lettersWeight,
+            digitsWeight: digitsWeight,
+            specialsWeight: specialsWeight
+        )
+        guard !value.isEmpty else {
+            print("Ошибка: проверь длину строки и веса символов")
+            return
+        }
+        print("Случайная строка: ", value)
+
+    case "password":
+        let length = intFlagValue("--length", in: args) ?? 25
+        guard length > 0 else {
+            print("Ошибка: --length должен быть больше 0")
+            return
+        }
+        print("Случайный пароль: ", randomPassword(length: length))
+
+    case "coin":
+        print("Случайная сторона монетки: ", randomCoin())
+
+    case "dice":
+        let sides = intFlagValue("--sides", in: args) ?? 6
+        guard sides > 0 else {
+            print("Ошибка: --sides должен быть больше 0")
+            return
+        }
+        print("Случайная сторона кубика со сторонами", "\(sides):", randomDice(sides: sides))
+
+    case "uuid":
+        print(randomUUID())
+
+    case "hex":
+        let bytes = intFlagValue("--bytes", in: args) ?? 16
+        guard bytes > 0 else {
+            print("Ошибка: --bytes должен быть больше 0")
+            return
+        }
+        print(randomHex(bytes: bytes))
+
+    case "pick":
+        guard !args.isEmpty else {
+            print("Ошибка: укажи элементы, например: swift main.swift pick apple banana")
+            return
+        }
+        print(randPick(args))
+
+    case "shuffle":
+        guard !args.isEmpty else {
+            print("Ошибка: укажи элементы, например: swift main.swift shuffle a b c d")
+            return
+        }
+        print(randShuffle(args))
+
+    case "list":
+        let count = intFlagValue("--count", in: args) ?? 5
+        let minValue = intFlagValue("--min", in: args) ?? 1
+        let maxValue = intFlagValue("--max", in: args) ?? 10
+        guard count > 0 else {
+            print("Ошибка: --count должен быть больше 0")
+            return
+        }
+        guard minValue <= maxValue else {
+            print("Ошибка: --min не может быть больше --max")
+            return
+        }
+        print(randomList(min: minValue, max: maxValue, count: count))
+
+    case "date":
+        let currentYear = Calendar.current.component(.year, from: Date())
+        let fromYear = intFlagValue("--from", in: args) ?? 1990
+        let toYear = intFlagValue("--to", in: args) ?? currentYear
+        guard fromYear <= toYear else {
+            print("Ошибка: --from не может быть больше --to")
+            return
+        }
+        print(randomDate(fromYear: fromYear, toYear: toYear))
+
+    case "color":
+        print(randomColor())
+
+    case "help", "--help", "-h":
+        printUsage()
+
+    default:
+        print("Неизвестная команда: \(command)")
+        printUsage()
+    }
+}
+
+let cliArgs = Array(CommandLine.arguments.dropFirst())
+if cliArgs.isEmpty {
+    printAllDefaults()
+} else {
+    let command = cliArgs[0].lowercased()
+    let commandArgs = Array(cliArgs.dropFirst())
+    runCommand(command, args: commandArgs)
+}
