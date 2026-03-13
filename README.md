@@ -25,13 +25,13 @@ CLI-утилита для генерации случайных значений
 **Примеры:**
 
 ```bash
-random number
+swift main.swift number
 ```
 
 Случайное число (например 0-100)
 
 ```bash
-random number --min 10 --max 50
+swift main.swift number --min 10 --max 50
 ```
 
 Случайное число от 10 до 50.
@@ -48,7 +48,7 @@ random number --min 10 --max 50
 **Примеры:**
 
 ```bash
-random string --length 10
+swift main.swift string --length 10
 ```
 
 **Результат:**
@@ -60,7 +60,7 @@ aF82kLpQ1x
 Можно добавить тип символов:
 
 ```bash
-random string --length 10 --charset alnum
+swift main.swift string --length 10 --charset alnum
 ```
 
 ## coin
@@ -71,7 +71,7 @@ random string --length 10 --charset alnum
 **Пример:**
 
 ```bash
-random coin
+swift main.swift coin
 ```
 
 **Результат:**
@@ -87,13 +87,13 @@ random coin
 **Примеры:**
 
 ```bash
-random dice
+swift main.swift dice
 ```
 
 Число 1-6.
 
 ```bash
-random dice --sides 20
+swift main.swift dice --sides 20
 ```
 
 Кубик d20 (1-20) используется в настольных играх.
@@ -108,7 +108,7 @@ random dice --sides 20
 **Пример:**
 
 ```bash
-random uuid
+swift main.swift uuid
 ```
 
 **Результат:**
@@ -134,7 +134,7 @@ random uuid
 **Пример:**
 
 ```bash
-random hex --bytes 16
+swift main.swift hex --bytes 16
 ```
 
 **Результат:**
@@ -160,7 +160,7 @@ random hex --bytes 16
 **Пример:**
 
 ```bash
-random password --length 16
+swift main.swift password --length 16
 ```
 
 **Результат:**
@@ -185,7 +185,7 @@ gT7!qL2#Zp9@rA4$
 **Пример:**
 
 ```bash
-random pick apple banana orange
+swift main.swift pick apple banana orange
 ```
 
 **Результат:**
@@ -210,7 +210,7 @@ banana
 **Пример:**
 
 ```bash
-random shuffle a b c d
+swift main.swift shuffle a b c d
 ```
 
 **Результат:**
@@ -235,7 +235,7 @@ c a d b
 **Пример:**
 
 ```bash
-random list --count 5 --min 1 --max 10
+swift main.swift list --count 5 --min 1 --max 10
 ```
 
 **Результат:**
@@ -254,7 +254,7 @@ random list --count 5 --min 1 --max 10
 **Пример:**
 
 ```bash
-random date --from 2000 --to 2024
+swift main.swift date --from 2000 --to 2024
 ```
 
 **Результат:**
@@ -279,7 +279,7 @@ random date --from 2000 --to 2024
 **Пример:**
 
 ```bash
-random color
+swift main.swift color
 ```
 
 **Результат:**
@@ -312,7 +312,7 @@ rgb(63,167,214)
 **Пример:**
 
 ```bash
-random number --seed 42
+swift main.swift number --seed 42
 ```
 
 Каждый запуск даст один и тот же результат.
