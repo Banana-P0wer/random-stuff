@@ -3,6 +3,7 @@ import Foundation
 let letterChars = Array("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 let digitChars = Array("0123456789")
 let specialChars = Array("!@#$%^&*_-+=~")
+let executableName = URL(fileURLWithPath: CommandLine.arguments.first ?? "random").lastPathComponent
 
 func clearScreen() {
     print("\u{001B}[2J\u{001B}[H", terminator: "")
@@ -120,7 +121,7 @@ func intFlagValue(_ flag: String, in args: [String]) -> Int? {
 func printUsage() {
     print("""
     Использование:
-      swift main.swift <command> [options]
+      \(executableName) <command> [options]
 
     Команды:
       number   [--min N] [--max N]
@@ -215,14 +216,14 @@ func runCommand(_ command: String, args: [String]) {
 
     case "pick":
         guard !args.isEmpty else {
-            print("Ошибка: укажи элементы, например: swift main.swift pick apple banana")
+            print("Ошибка: укажи элементы, например: \(executableName) pick apple banana")
             return
         }
         print(randPick(args))
 
     case "shuffle":
         guard !args.isEmpty else {
-            print("Ошибка: укажи элементы, например: swift main.swift shuffle a b c d")
+            print("Ошибка: укажи элементы, например: \(executableName) shuffle a b c d")
             return
         }
         print(randShuffle(args))
