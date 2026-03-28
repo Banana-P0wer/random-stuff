@@ -43,7 +43,7 @@ func randomNumber(from: Int, to: Int) -> Int {
 }
 
 func randomCoin() -> String {
-    return Bool.random() ? "орёл" : "решка"
+    return Bool.random() ? "heads" : "tails"
 }
 
 func randomDice(sides: Int) -> Int {
@@ -120,10 +120,10 @@ func intFlagValue(_ flag: String, in args: [String]) -> Int? {
 
 func printUsage() {
     print("""
-    Использование:
+    Usage:
       \(executableName) <command> [options]
 
-    Команды:
+    Commands:
       number   [--min N] [--max N]
       string   [--length N] [--letters-weight N] [--digits-weight N] [--specials-weight N]
       password [--length N]
@@ -142,18 +142,18 @@ func printUsage() {
 
 func printAllDefaults() {
     clearScreen()
-    print("Случайная строка: \(randomString(length: 10, lettersWeight: 50, digitsWeight: 30))")
-    print("Случайный пароль: \(randomPassword())")
-    print("Случайное число: \(randomNumber(from: 1, to: 100))")
-    print("Случайная сторона монетки: \(randomCoin())")
-    print("Случайная сторона кубика: \(randomDice(sides: 6))")
+    print("Random string: \(randomString(length: 10, lettersWeight: 50, digitsWeight: 30))")
+    print("Random password: \(randomPassword())")
+    print("Random number: \(randomNumber(from: 1, to: 100))")
+    print("Random coin side: \(randomCoin())")
+    print("Random die roll: \(randomDice(sides: 6))")
     print("UUID: \(randomUUID())")
     print("HEX (16 bytes): \(randomHex(bytes: 16))")
-    print("Случайный выбор: \(randPick(["apple", "banana", "orange"]))")
-    print("Случайное перемешивание: \(randShuffle(["a", "b", "c", "d"]))")
-    print("Случайный список: \(randomList(min: 1, max: 10, count: 5))")
-    print("Случайная дата: \(randomDate(fromYear: 1990, toYear: 2026))")
-    print("Случайный цвет: \(randomColor())")
+    print("Random pick: \(randPick(["apple", "banana", "orange"]))")
+    print("Random shuffle: \(randShuffle(["a", "b", "c", "d"]))")
+    print("Random list: \(randomList(min: 1, max: 10, count: 5))")
+    print("Random date: \(randomDate(fromYear: 1990, toYear: 2026))")
+    print("Random color: \(randomColor())")
 }
 
 func runCommand(_ command: String, args: [String]) {
@@ -162,10 +162,10 @@ func runCommand(_ command: String, args: [String]) {
         let minValue = intFlagValue("--min", in: args) ?? 1
         let maxValue = intFlagValue("--max", in: args) ?? 100
         guard minValue <= maxValue else {
-            print("Ошибка: --min не может быть больше --max")
+            print("Error: --min cannot be greater than --max")
             return
         }
-        print("Случайное число:", randomNumber(from: minValue, to: maxValue))
+        print("Random number:", randomNumber(from: minValue, to: maxValue))
 
     case "string":
         let length = intFlagValue("--length", in: args) ?? 10
@@ -179,29 +179,29 @@ func runCommand(_ command: String, args: [String]) {
             specialsWeight: specialsWeight
         )
         guard !value.isEmpty else {
-            print("Ошибка: проверь длину строки и веса символов")
+            print("Error: check the string length and character weights")
             return
         }
-        print("Случайная строка: ", value)
+        print("Random string: ", value)
 
     case "password":
         let length = intFlagValue("--length", in: args) ?? 25
         guard length > 0 else {
-            print("Ошибка: --length должен быть больше 0")
+            print("Error: --length must be greater than 0")
             return
         }
-        print("Случайный пароль: ", randomPassword(length: length))
+        print("Random password: ", randomPassword(length: length))
 
     case "coin":
-        print("Случайная сторона монетки: ", randomCoin())
+        print("Random coin side: ", randomCoin())
 
     case "dice":
         let sides = intFlagValue("--sides", in: args) ?? 6
         guard sides > 0 else {
-            print("Ошибка: --sides должен быть больше 0")
+            print("Error: --sides must be greater than 0")
             return
         }
-        print("Случайная сторона кубика со сторонами", "\(sides):", randomDice(sides: sides))
+        print("Random die roll with", "\(sides) sides:", randomDice(sides: sides))
 
     case "uuid":
         print(randomUUID())
@@ -209,21 +209,21 @@ func runCommand(_ command: String, args: [String]) {
     case "hex":
         let bytes = intFlagValue("--bytes", in: args) ?? 16
         guard bytes > 0 else {
-            print("Ошибка: --bytes должен быть больше 0")
+            print("Error: --bytes must be greater than 0")
             return
         }
         print(randomHex(bytes: bytes))
 
     case "pick":
         guard !args.isEmpty else {
-            print("Ошибка: укажи элементы, например: \(executableName) pick apple banana")
+            print("Error: provide items, for example: \(executableName) pick apple banana")
             return
         }
         print(randPick(args))
 
     case "shuffle":
         guard !args.isEmpty else {
-            print("Ошибка: укажи элементы, например: \(executableName) shuffle a b c d")
+            print("Error: provide items, for example: \(executableName) shuffle a b c d")
             return
         }
         print(randShuffle(args))
@@ -233,11 +233,11 @@ func runCommand(_ command: String, args: [String]) {
         let minValue = intFlagValue("--min", in: args) ?? 1
         let maxValue = intFlagValue("--max", in: args) ?? 10
         guard count > 0 else {
-            print("Ошибка: --count должен быть больше 0")
+            print("Error: --count must be greater than 0")
             return
         }
         guard minValue <= maxValue else {
-            print("Ошибка: --min не может быть больше --max")
+            print("Error: --min cannot be greater than --max")
             return
         }
         print(randomList(min: minValue, max: maxValue, count: count))
@@ -247,7 +247,7 @@ func runCommand(_ command: String, args: [String]) {
         let fromYear = intFlagValue("--from", in: args) ?? 1990
         let toYear = intFlagValue("--to", in: args) ?? currentYear
         guard fromYear <= toYear else {
-            print("Ошибка: --from не может быть больше --to")
+            print("Error: --from cannot be greater than --to")
             return
         }
         print(randomDate(fromYear: fromYear, toYear: toYear))
@@ -259,7 +259,7 @@ func runCommand(_ command: String, args: [String]) {
         printUsage()
 
     default:
-        print("Неизвестная команда: \(command)")
+        print("Unknown command: \(command)")
         printUsage()
     }
 }

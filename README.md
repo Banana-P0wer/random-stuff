@@ -1,63 +1,63 @@
 # random CLI
 
-CLI-утилита для генерации случайных значений: чисел, строк, паролей, UUID, дат, цветов и других данных. Она может генерировать:
-- числа
-- строки
-- пароли
+CLI utility for generating random values: numbers, strings, passwords, UUIDs, dates, colors and other data. It can generate:
+- numbers
+- strings
+- passwords
 - uuid
 - hex
-- даты
-- цвета
-- выбор из списка
-- перемешивание
-- броски кубиков
+- dates
+- colors
+- picks from a list
+- shuffles
+- dice rolls
 
-Удобный инструмент для разработчиков, тестирования, скриптов и повседневных задач.
+A handy tool for developers, testing, scripts and everyday tasks.
 
 ## number
 
-**Что делает:**
-Генерирует случайное число.
+**What it does:**
+Generates a random number.
 
-**Для чего нужно:**
-Когда нужно случайное число в заданном диапазоне.
+**What it is for:**
+When you need a random number in a given range.
 
-**Примеры:**
+**Examples:**
 
 ```bash
 swift main.swift number
 ```
 
-Случайное число (например 0-100)
+Random number (for example 0-100)
 
 ```bash
 swift main.swift number --min 10 --max 50
 ```
 
-Случайное число от 10 до 50.
+Random number from 10 to 50.
 
 
 ## string
 
-**Что делает:**
-Генерирует случайную строку.
+**What it does:**
+Generates a random string.
 
-**Для чего нужно:**
-Токены, тестовые данные, временные ключи.
+**What it is for:**
+Tokens, test data, temporary keys.
 
-**Примеры:**
+**Examples:**
 
 ```bash
 swift main.swift string --length 10
 ```
 
-**Результат:**
+**Result:**
 
 ```bash
 aF82kLpQ1x
 ```
 
-Можно добавить тип символов:
+You can add a character type:
 
 ```bash
 swift main.swift string --length 10 --charset alnum
@@ -65,180 +65,180 @@ swift main.swift string --length 10 --charset alnum
 
 ## coin
 
-**Что делает:**
-Подбрасывает виртуальную монетку.
+**What it does:**
+Flips a virtual coin.
 
-**Пример:**
+**Example:**
 
 ```bash
 swift main.swift coin
 ```
 
-**Результат:**
+**Result:**
 
-`орёл` / `решка`
+`heads` / `tails`
 
 
 ## dice
 
-**Что делает:**
-Бросает игральный кубик.
+**What it does:**
+Rolls a die.
 
-**Примеры:**
+**Examples:**
 
 ```bash
 swift main.swift dice
 ```
 
-Число 1-6.
+Number 1-6.
 
 ```bash
 swift main.swift dice --sides 20
 ```
 
-Кубик d20 (1-20) используется в настольных играх.
+A d20 die (1-20) is used in tabletop games.
 
 
 
 ## uuid
 
-**Что делает:**
-Генерирует UUID (уникальный идентификатор).
+**What it does:**
+Generates a UUID (unique identifier).
 
-**Пример:**
+**Example:**
 
 ```bash
 swift main.swift uuid
 ```
 
-**Результат:**
+**Result:**
 
 ```text
 550e8400-e29b-41d4-a716-446655440000
 ```
 
-**Для чего нужно:**
+**What it is for:**
 
-- id в базах данных
-- id объектов
-- id файлов
+- ids in databases
+- object ids
+- file ids
 - id API
 
 
 
 ## hex
 
-**Что делает:**
-Генерирует случайную строку в hexadecimal формате.
+**What it does:**
+Generates a random string in hexadecimal format.
 
-**Пример:**
+**Example:**
 
 ```bash
 swift main.swift hex --bytes 16
 ```
 
-**Результат:**
+**Result:**
 
 ```text
 9f2a7c4d1e8b3a6f4d9c1e2a3b7f0c8d
 ```
 
-**Для чего нужно:**
+**What it is for:**
 
-- ключи
-- токены
-- криптография
-- хеши
+- keys
+- tokens
+- cryptography
+- hashes
 
 
 
 ## password
 
-**Что делает:**
-Генерирует случайный пароль.
+**What it does:**
+Generates a random password.
 
-**Пример:**
+**Example:**
 
 ```bash
 swift main.swift password --length 16
 ```
 
-**Результат:**
+**Result:**
 
 ```text
 gT7!qL2#Zp9@rA4$
 ```
 
-Обычно содержит:
+Usually contains:
 
-- буквы
-- цифры
-- специальные символы
+- letters
+- digits
+- special characters
 
 
 
 ## pick
 
-**Что делает:**
-Выбирает случайный элемент из списка.
+**What it does:**
+Picks a random item from a list.
 
-**Пример:**
+**Example:**
 
 ```bash
 swift main.swift pick apple banana orange
 ```
 
-**Результат:**
+**Result:**
 
 ```text
 banana
 ```
 
-**Для чего нужно:**
+**What it is for:**
 
-- случайный выбор
-- тесты
-- принятие решений
+- random choices
+- tests
+- making decisions
 
 
 
 ## shuffle
 
-**Что делает:**
-Перемешивает список.
+**What it does:**
+Shuffles a list.
 
-**Пример:**
+**Example:**
 
 ```bash
 swift main.swift shuffle a b c d
 ```
 
-**Результат:**
+**Result:**
 
 ```text
 c a d b
 ```
 
-**Для чего нужно:**
+**What it is for:**
 
-- перемешивание данных
-- карты
-- случайные порядки
+- shuffling data
+- cards
+- random orders
 
 
 
 ## list
 
-**Что делает:**
-Генерирует список случайных чисел или элементов.
+**What it does:**
+Generates a list of random numbers or items.
 
-**Пример:**
+**Example:**
 
 ```bash
 swift main.swift list --count 5 --min 1 --max 10
 ```
 
-**Результат:**
+**Result:**
 
 ```text
 3, 7, 1, 9, 4
@@ -248,77 +248,77 @@ swift main.swift list --count 5 --min 1 --max 10
 
 ## date
 
-**Что делает:**
-Генерирует случайную дату.
+**What it does:**
+Generates a random date.
 
-**Пример:**
+**Example:**
 
 ```bash
 swift main.swift date --from 2000 --to 2024
 ```
 
-**Результат:**
+**Result:**
 
 ```text
 2013-07-19
 ```
 
-**Для чего нужно:**
+**What it is for:**
 
-- тестовые данные
-- базы данных
-- симуляции
+- test data
+- databases
+- simulations
 
 
 
 ## color
 
-**Что делает:**
-Генерирует случайный цвет.
+**What it does:**
+Generates a random color.
 
-**Пример:**
+**Example:**
 
 ```bash
 swift main.swift color
 ```
 
-**Результат:**
+**Result:**
 
 ```text
 #3FA7D6
 ```
 
-или
+or
 
 ```text
 rgb(63,167,214)
 ```
 
-**Для чего нужно:**
+**What it is for:**
 
-- дизайн
-- тест UI
-- генерация тем
+- design
+- UI tests
+- generating themes
 
 
 
 ## seed
 
-**Что делает:**
-Задаёт начальное значение генератора случайных чисел.
+**What it does:**
+Sets the starting value of the random number generator.
 
-Это нужно, чтобы рандом был повторяемым.
+This is needed when you want the random result to be repeatable.
 
-**Пример:**
+**Example:**
 
 ```bash
 swift main.swift number --seed 42
 ```
 
-Каждый запуск даст один и тот же результат.
+Every run gives the same result.
 
-**Для чего нужно:**
+**What it is for:**
 
-- тестирование
-- воспроизводимость
-- симуляции
+- testing
+- reproducibility
+- simulations
